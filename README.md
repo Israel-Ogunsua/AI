@@ -1,2 +1,3 @@
 # AI
+As I embark on this exciting AI project focused on human interaction, the journey will encompass the intricate interplay of data science, mathematics, and programming. By harnessing the power of data, leveraging mathematical principles, and employing programming expertise, we can create applications that enrich and transform the way we interact with technology. As the field of AI continues to advance, it is crucial to recognize that AI projects extend far beyond the realm of up-looking robots, and instead, they are rooted in the seamless integration of technology into our everyday lives. 
 I will be using one of the most used programming languages; Python, OpenAi API, Terraform, SQL, and more.
