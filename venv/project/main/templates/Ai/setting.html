@@ -1,0 +1,71 @@
+{% extends 'Ai/base.html' %}
+
+{% block content %}
+  <div class="settings-page">
+    <h2>Settings</h2>
+    <form>
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" />
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" />
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" />
+      </div>
+      <div class="form-group">
+        <label for="notifications">Enable Notifications:</label>
+        <input type="checkbox" id="notifications" name="notifications" />
+      </div>
+      <button type="submit">Save Settings</button>
+    </form>
+  </div>
+
+  <style>
+    .settings-page {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    .settings-page h2 {
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .form-group input[type="checkbox"] {
+      margin-top: 5px;
+    }
+
+    button[type="submit"] {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+{% endblock %}

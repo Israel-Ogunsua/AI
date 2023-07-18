@@ -1,0 +1,235 @@
+{% extends "Ai/base.html" %}
+
+{% block content %}
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #222;
+      color: #fff;
+    }
+
+    .chat-interface {
+      display: flex;
+    }
+
+    .sidebar {
+      width: 250px;
+      padding: 20px;
+      background-color: #333;
+    }
+
+    .voice-box {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .voice-circle {
+      width: 60px;
+      height: 60px;
+      background-color: #555;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .mic-logo {
+      width: 30px;
+      height: 30px;
+      background-color: #777;
+      border-radius: 50%;
+    }
+
+    .voice-text {
+      font-size: 18px;
+      margin-left: 10px;
+      color: #fff;
+    }
+
+    .youtube-video {
+      margin-top: 20px;
+    }
+
+    .chat-content {
+      flex-grow: 1;
+      padding: 20px;
+      background-color: #333;
+    }
+
+    .chat-header {
+      padding-bottom: 10px;
+      border-bottom: 1px solid #555;
+    }
+
+    .chat-header h2 {
+      font-size: 24px;
+      color: #fff;
+      margin: 0;
+    }
+
+    .chat-messages {
+      margin-top: 20px;
+    }
+
+    .chat-input {
+      margin-top: 20px;
+      display: flex;
+    }
+
+    .chat-input input[type="text"] {
+      flex-grow: 1;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      background-color: #555;
+      color: #fff;
+    }
+
+    .chat-input button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: #fff;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    /* Dark mode styles */
+    body.dark-mode {
+      background-color: #111;
+      color: #fff;
+    }
+
+    .sidebar.dark-mode {
+      background-color: #222;
+    }
+
+    .voice-circle.dark-mode {
+      background-color: #555;
+    }
+
+    .mic-logo.dark-mode {
+      background-color: #777;
+    }
+
+    .voice-text.dark-mode {
+      color: #fff;
+    }
+
+    .youtube-video.dark-mode {
+      background-color: #222;
+    }
+
+    .chat-content.dark-mode {
+      background-color: #222;
+    }
+
+    .chat-header.dark-mode {
+      border-color: #555;
+    }
+
+    .chat-header h2.dark-mode {
+      color: #fff;
+    }
+
+    .chat-input input[type="text"].dark-mode {
+      background-color: #555;
+      color: #fff;
+    }
+
+    .chat-input button.dark-mode {
+      background-color: #4CAF50;
+      color: #fff;
+    }
+  </style>
+  <script>
+    function toggleDarkMode() {
+      var body = document.body;
+      body.classList.toggle('dark-mode');
+      var sidebar = document.querySelector('.sidebar');
+      sidebar.classList.toggle('dark-mode');
+      var voiceCircle = document.querySelector('.voice-circle');
+      voiceCircle.classList.toggle('dark-mode');
+      var micLogo = document.querySelector('.mic-logo');
+      micLogo.classList.toggle('dark-mode');
+      var voiceText = document.querySelector('.voice-text');
+      voiceText.classList.toggle('dark-mode');
+      var youtubeVideo = document.querySelector('.youtube-video');
+      youtubeVideo.classList.toggle('dark-mode');
+      var chatContent = document.querySelector('.chat-content');
+      chatContent.classList.toggle('dark-mode');
+      var chatHeader = document.querySelector('.chat-header');
+      chatHeader.classList.toggle('dark-mode');
+      var chatHeaderText = document.querySelector('.chat-header h2');
+      chatHeaderText.classList.toggle('dark-mode');
+      var chatInputText = document.querySelector('.chat-input input[type="text"]');
+      chatInputText.classList.toggle('dark-mode');
+      var chatInputButton = document.querySelector('.chat-input button');
+      chatInputButton.classList.toggle('dark-mode');
+    }
+  </script>
+</head>
+<body>
+  <div class="chat-interface">
+    <div class="sidebar">
+      <div class="voice-box">
+        <div class="voice-circle">
+          <div class="mic-logo"></div>
+        </div>
+        <div class="voice-text">Listening...</div>
+      </div>
+      <div class="youtube-video">
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="chat-content">
+      <div class="chat-header">
+        <h2>Messages</h2>
+      </div>
+      <div class="chat-messages" id="message-list">
+        <!-- Messages will be dynamically added here -->
+      </div>
+      <div class="chat-input">
+        <input type="text" id="new-message" placeholder="Type a message...">
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+
+  <script>
+  function sendMessage() {
+  var messageInput = document.getElementById('new-message');
+  var messageList = document.getElementById('message-list');
+  var messageText = messageInput.value.trim();
+  
+  if (messageText !== '') {
+    var newMessage = document.createElement('div');
+    newMessage.className = 'message';
+    newMessage.textContent = messageText;
+    messageList.appendChild(newMessage);
+    messageInput.value = '';
+  }
+}
+
+
+  </script>
+
+
+
+
+
+{% endblock content %}
+    
+

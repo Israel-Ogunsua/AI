@@ -7,4 +7,7 @@ def about(request):
 
 
 def home(request ):
-    return render (request, 'Ai/base.html')
+    return render (request, 'Ai/home.html')
+
+def setting(request ):
+    return render (request, 'Ai/setting.html')

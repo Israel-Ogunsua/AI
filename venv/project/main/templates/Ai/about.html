@@ -1,34 +1,227 @@
-{% extends "Ai/base.html" %}
+{% extends 'Ai/base.html' %}
 
 {% block content %}
-
-
-    <div class="achievements">
-        <div class="work">
-        <i class="fas fa-atom"></i>
-        <p class="work-heading">Projects</p>
-        <p class="work-text">I have worked on many projects and I am very proud of them. I am a very good developer and I am always looking for new projects.</p>
+  <div class="chat-interface">
+    <div class="sidebar">
+      <div class="voice-box">
+        <div class="voice-circle">
+          <div class="mic-logo"></div>
         </div>
-        <div class="work">
-        <i class="fas fa-skiing"></i>
-        <p class="work-heading">Skills</p>
-        <p class="work-text">I have a lot of skills and I am very good at them. I am very good at programming and I am always looking for new skills.</p>
-        </div>
-        <div class="work">
-        <i class="fas fa-ethernet"></i>
-        <p class="work-heading">Network</p>
-        <p class="work-text">I have a lot of network skills and I am very good at them. I am very good at networking and I am always looking for new network skills.</p>
-        </div>
+        <div class="voice-text">Listening...</div>
+      </div>
+      <div class="youtube-video">
+        <img src="path/to/voice-assistant-logo.png" alt="Voice Assistant Logo">
+      </div>
     </div>
-    <div class="about-me">
-        <div class="about-me-text">
-        <h2>About Me</h2>
-        <p>I am a web developer and I love to create websites. I am a very good developer and I am always looking for new projects. I am a very good developer and I am always looking for new projects.</p>
+    <div class="chat-content">
+      <div class="chat-header">
+        <h2>About Us</h2>
+      </div>
+      <div class="chat-messages" id="message-list">
+        <div class="message">
+          <p>Welcome to our website!</p>
         </div>
-        <img src="https://images.unsplash.com/photo-1596495578065-6e0763fa1178?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80" alt="me">
+        <div class="message">
+          <p>We are a team of dedicated professionals passionate about creating innovative solutions for our clients.</p>
+        </div>
+        <div class="message">
+          <p>Our mission is to provide top-notch services and deliver exceptional results.</p>
+        </div>
+        <div class="message">
+          <p>Feel free to reach out to us for any inquiries or collaborations.</p>
+        </div>
+      </div>
+      <div class="chat-input">
+        <input type="text" id="new-message" placeholder="Type a message...">
+        <button onclick="sendMessage()">Send</button>
+      </div>
     </div>
-    </main>
+  </div>
+{% endblock %}
 
-{% endblock content %}
-    
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #222;
+    color: #fff;
+  }
 
+  .chat-interface {
+    display: flex;
+  }
+
+  .sidebar {
+    width: 250px;
+    padding: 20px;
+    background-color: #333;
+  }
+
+  .voice-box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .voice-circle {
+    width: 60px;
+    height: 60px;
+    background-color: #555;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mic-logo {
+    width: 30px;
+    height: 30px;
+    background-color: #777;
+    border-radius: 50%;
+  }
+
+  .voice-text {
+    font-size: 18px;
+    margin-left: 10px;
+    color: #fff;
+  }
+
+  .youtube-video {
+    margin-top: 20px;
+  }
+
+  .chat-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #333;
+  }
+
+  .chat-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #555;
+  }
+
+  .chat-header h2 {
+    font-size: 24px;
+    color: #fff;
+    margin: 0;
+  }
+
+  .chat-messages {
+    margin-top: 20px;
+  }
+
+  .message {
+    background-color: #555;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+
+  .chat-input {
+    margin-top: 20px;
+    display: flex;
+  }
+
+  .chat-input input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #555;
+    color: #fff;
+  }
+
+  .chat-input button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: #fff;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+  /* Dark mode styles */
+  body.dark-mode {
+    background-color: #111;
+    color: #fff;
+  }
+
+  .sidebar.dark-mode {
+    background-color: #222;
+  }
+
+  .voice-circle.dark-mode {
+    background-color: #555;
+  }
+
+  .mic-logo.dark-mode {
+    background-color: #777;
+  }
+
+  .voice-text.dark-mode {
+    color: #fff;
+  }
+
+  .youtube-video.dark-mode {
+    background-color: #222;
+  }
+
+  .chat-content.dark-mode {
+    background-color: #222;
+  }
+
+  .chat-header.dark-mode {
+    border-color: #555;
+  }
+
+  .chat-header h2.dark-mode {
+    color: #fff;
+  }
+
+  .message.dark-mode {
+    background-color: #555;
+    color: #fff;
+  }
+
+  .chat-input input[type="text"].dark-mode {
+    background-color: #555;
+    color: #fff;
+  }
+
+  .chat-input button.dark-mode {
+    background-color: #4CAF50;
+    color: #fff;
+  }
+</style>
+<script>
+  function toggleDarkMode() {
+    var body = document.body;
+    body.classList.toggle('dark-mode');
+    var sidebar = document.querySelector('.sidebar');
+    sidebar.classList.toggle('dark-mode');
+    var voiceCircle = document.querySelector('.voice-circle');
+    voiceCircle.classList.toggle('dark-mode');
+    var micLogo = document.querySelector('.mic-logo');
+    micLogo.classList.toggle('dark-mode');
+    var voiceText = document.querySelector('.voice-text');
+    voiceText.classList.toggle('dark-mode');
+    var youtubeVideo = document.querySelector('.youtube-video');
+    youtubeVideo.classList.toggle('dark-mode');
+    var chatContent = document.querySelector('.chat-content');
+    chatContent.classList.toggle('dark-mode');
+    var chatHeader = document.querySelector('.chat-header');
+    chatHeader.classList.toggle('dark-mode');
+    var chatHeaderText = document.querySelector('.chat-header h2');
+    chatHeaderText.classList.toggle('dark-mode');
+    var chatInputText = document.querySelector('.chat-input input[type="text"]');
+    chatInputText.classList.toggle('dark-mode');
+    var chatInputButton = document.querySelector('.chat-input button');
+    chatInputButton.classList.toggle('dark-mode');
+  }
+</script>
