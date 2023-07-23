@@ -3,12 +3,62 @@
 {% block content %}
 
   <style>
+     .messages-box {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .messages-list {
+      padding-left: 0;
+    }
+
+    .message {
+      margin-bottom: 15px;
+      list-style: none;
+    }
+
+    .message-text {
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .sent {
+      background-color: #dcf8c6;
+      align-self: flex-end;
+    }
+
+    .received {
+      background-color: #f1f0f0;
+      align-self: flex-start;
+    }
+
+    .message-form {
+      border-radius: 20px;
+      padding: 10px;
+      background-color: #f8f9fa;
+    }
+
+    .message-input {
+      flex: 1;
+      border-radius: 0;
+      border-right: none;
+    }
+
+    .btn-send {
+      border-radius: 0;
+    }
+
+    .chat-container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #222;
-      color: #fff;
+      background-color: #fcf6f6;
+   
     }
 
     .chat-interface {
@@ -16,9 +66,9 @@
     }
 
     .sidebar {
-      width: 250px;
+      width: 300px;
       padding: 20px;
-      background-color: #333;
+      background-color: rgb(61, 60, 60);
     }
 
     .voice-box {
@@ -30,7 +80,7 @@
     .voice-circle {
       width: 60px;
       height: 60px;
-      background-color: #555;
+      background-color: rgb(208, 208, 213);
       border-radius: 50%;
       display: flex;
       justify-content: center;
@@ -58,6 +108,7 @@
       flex-grow: 1;
       padding: 20px;
       background-color: #333;
+      overflow-y: auto; /* Add this line to make it scrollable */
     }
 
     .chat-header {
@@ -95,140 +146,126 @@
       font-size: 16px;
       border: none;
       border-radius: 5px;
-      background-color: #4CAF50;
+      background-color: #2a4792;
       color: #fff;
       margin-left: 10px;
       cursor: pointer;
     }
+    .message-input {
+    border-radius: 20px;
+  }
 
-    /* Dark mode styles */
-    body.dark-mode {
-      background-color: #111;
-      color: #fff;
-    }
+  /* Add border radius to the btn-send class (submit button) */
+  .btn-send {
+    border-radius: 20px;
+  }
 
-    .sidebar.dark-mode {
-      background-color: #222;
-    }
-
-    .voice-circle.dark-mode {
-      background-color: #555;
-    }
-
-    .mic-logo.dark-mode {
-      background-color: #777;
-    }
-
-    .voice-text.dark-mode {
-      color: #fff;
-    }
-
-    .youtube-video.dark-mode {
-      background-color: #222;
-    }
-
-    .chat-content.dark-mode {
-      background-color: #222;
-    }
-
-    .chat-header.dark-mode {
-      border-color: #555;
-    }
-
-    .chat-header h2.dark-mode {
-      color: #fff;
-    }
-
-    .chat-input input[type="text"].dark-mode {
-      background-color: #555;
-      color: #fff;
-    }
-
-    .chat-input button.dark-mode {
-      background-color: #4CAF50;
-      color: #fff;
-    }
   </style>
-  <script>
-    function toggleDarkMode() {
-      var body = document.body;
-      body.classList.toggle('dark-mode');
-      var sidebar = document.querySelector('.sidebar');
-      sidebar.classList.toggle('dark-mode');
-      var voiceCircle = document.querySelector('.voice-circle');
-      voiceCircle.classList.toggle('dark-mode');
-      var micLogo = document.querySelector('.mic-logo');
-      micLogo.classList.toggle('dark-mode');
-      var voiceText = document.querySelector('.voice-text');
-      voiceText.classList.toggle('dark-mode');
-      var youtubeVideo = document.querySelector('.youtube-video');
-      youtubeVideo.classList.toggle('dark-mode');
-      var chatContent = document.querySelector('.chat-content');
-      chatContent.classList.toggle('dark-mode');
-      var chatHeader = document.querySelector('.chat-header');
-      chatHeader.classList.toggle('dark-mode');
-      var chatHeaderText = document.querySelector('.chat-header h2');
-      chatHeaderText.classList.toggle('dark-mode');
-      var chatInputText = document.querySelector('.chat-input input[type="text"]');
-      chatInputText.classList.toggle('dark-mode');
-      var chatInputButton = document.querySelector('.chat-input button');
-      chatInputButton.classList.toggle('dark-mode');
-    }
-  </script>
-</head>
-<body>
-  <div class="chat-interface">
-    <div class="sidebar">
-      <div class="voice-box">
-        <div class="voice-circle">
-          <div class="mic-logo"></div>
-        </div>
-        <div class="voice-text">Listening...</div>
-      </div>
-      <div class="youtube-video">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-    </div>
-    <div class="chat-content">
+
+ 
+  <div class="chat-content">
       <div class="chat-header">
-        <h2>Messages</h2>
+        <h2>New Chat Messages</h2>
       </div>
-      <div class="chat-messages" id="message-list">
-        <!-- Messages will be dynamically added here -->
-      </div>
-      <div class="chat-input">
-        <input type="text" id="new-message" placeholder="Type a message...">
-        <button onclick="sendMessage()">Send</button>
-      </div>
+
+      
+  
+      <div class="chat-container">
+        <div class="card flex-grow-1">
+          <div class="card-body messages-box">
+            
+            <ul class="list-unstyled messages-list">
+      
+            
+              <li class="message received">
+                <div class="message-text">
+                  <div class="message-sender">
+                    <b>AI Response</b>
+                  </div>
+                  <div class="message-content">
+                    <b>Hey there! How can i help you today?</b>
+                  </div>
+                </div>
+              </li>
+    
+            </ul>
+            
+          </div>
+         
+        </div>
+
+        <br>
+      <form class="message-form">
+        {%csrf_token%}
+        <div class="input-group">
+          <input type="text" class="form-control message-input" placeholder="Type your message...">
+          <div class="input-group-append">
+            <button type="submit" class="btn btn-primary btn-send">Send</button>
+          </div>
+        </div>
+      </form>
+    
     </div>
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-
-
   <script>
-  function sendMessage() {
-  var messageInput = document.getElementById('new-message');
-  var messageList = document.getElementById('message-list');
-  var messageText = messageInput.value.trim();
-  
-  if (messageText !== '') {
-    var newMessage = document.createElement('div');
-    newMessage.className = 'message';
-    newMessage.textContent = messageText;
-    messageList.appendChild(newMessage);
-    messageInput.value = '';
-  }
-}
+    const messagesList = document.querySelector('.messages-list');
+      const messageForm = document.querySelector('.message-form');
+      const messageInput = document.querySelector('.message-input');
+
+      messageForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const message = messageInput.value.trim();
+        if (message.length === 0) {
+          return;
+        }
+
+        const messageItem = document.createElement('li');
+        messageItem.classList.add('message', 'sent');
+        messageItem.innerHTML = `
+            <div class="message-text">
+                <div class="message-sender">
+                    <b>You</b>
+                </div>
+                <div class="message-content">
+                    ${message}
+                </div>
+            </div>`;
+        messagesList.appendChild(messageItem);
+
+        messageInput.value = '';
+
+        fetch('', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({
+            'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+            'message': message
+          })
+        })
+          .then(response => response.json())
+          .then(data => {
+            const response = data.response;
+            const messageItem = document.createElement('li');
+            messageItem.classList.add('message', 'received');
+            messageItem.innerHTML = `
+            <div class="message-text">
+                <div class="message-sender">
+                  <b>AI Chatbot</b>
+                </div>
+                <div class="message-content">
+                    ${response}
+                </div>
+            </div>
+              `;
+            messagesList.appendChild(messageItem);
+          });
+      });
+
 
 
   </script>
-
-
-
-
 
 {% endblock content %}
     

@@ -18,5 +18,72 @@ def main():
     execute_from_command_line(sys.argv)
 
 
+# import speech_recognition as sr
+# import pywhatkit
+# import datetime
+# import wikipedia
+# import pyttsx3
+
+# #Start by creating a listiner 
+# listener = sr.Recognizer()
+# engine = pyttsx3.init()
+# voices = engine.getProperty("voices")
+# engine.setProperty("voice", voices[1].id)
+# engine.say("I am Israel your voice assistance")
+# engine.say("What can I do for you today?")
+# engine.runAndWait()
+
+# def talk(text):
+#     engine.say(text)
+#     engine.runAndWait()
+
+
+# def say_someting():
+#         with sr.Microphone() as source:
+#             print("Speaking...")
+#             voice = listener.listen(source)
+#             action = listener.recognize_google(voice)
+#             #action = action.lower()
+#             talk(action)
+
+#             if 'david' in action:
+#                 action = action.replace("david","")
+#                 print(action)
+
+#             elif "play" in action:
+#                 song = action.replace("play","")
+#                 print("playing.....")
+#                 talk("playing" + song)
+#                 pywhatkit.playonyt(song)
+
+#             elif "play me" in action:
+#                 song = action.replace("play me","")
+#                 print("playing.....")
+#                 talk("playing" + song)
+#                 pywhatkit.playonyt(song)
+
+#             elif "time" in action:
+#                 time = datetime.datetime.now().strftime("%I:%M %p")
+#                 print(time)
+#                 talk("The current time is" + time)
+
+#             elif 'who' in action:
+#                 discription = action.replace("who", "")
+#                 information = wikipedia.summary(discription, 8)
+#                 print(information)
+#                 talk(information)
+
+#             else:
+#                 talk('Can you say that again') 
+
+#         return action
+
+# def run():
+#         command = say_someting()
+#         return command
+
+  
+
 if __name__ == '__main__':
     main()
+    # run() 

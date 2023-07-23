@@ -6,20 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   {% if title %}
-  <title>Django Blog - {{ title }}</title>
-{% else %}
-  <title>Django Blog</title>
-{% endif %}
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>Django Blog - {{ title }}</title>
+  {% else %}
+   <title>Django Blog</title>
+  {% endif %}
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
   <style>
+ 
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
+      background-color: black;
     }
 
     .header {
-      background-color: #4CAF50;
+      background-color: #61a4ec; /* Blue color for the nav bar */
       padding: 15px;
       display: flex;
       justify-content: space-between;
@@ -61,159 +64,80 @@
     .col-md-g {
       flex-grow: 1;
       padding: 20px;
-      background-color: #fff;
+      background-color: rgb(240, 229, 229);
       border-radius: 5px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    @media (max-width: 767px) {
+    @media (max-width: 100%) {
       .row {
-        flex-direction: column;
-      }
+      width: 90%; /* Set the width to 90% of the page */
+      flex-direction: column;
+      gap: 20px; 
     }
-    
-    /* Dark mode styles */
-    body.dark-mode {
-      background-color: #333;
-      color: #fff;
-    }
-    
-    .header.dark-mode {
-      background-color: #222;
-    }
-    
-    .col-md-g.dark-mode {
-      background-color: #444;
-    }
-    
-    .nav-items a.dark-mode:hover {
-      background-color: #222;
-    }
-    
+  }
+
+
+
+
     .footer {
-      background-color: #222;
+      background-color: #61a4ec;
       color: #fff;
-      padding: 20px;
       text-align: center;
+      display: flex;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 10px;
     }
-    
+      
+
     .sidebar {
       width: 250px;
       padding: 20px;
-      background-color: #333;
+      background-color:  rgb(240, 229, 229);
     }
-    
+
     .movie-display {
       margin-bottom: 20px;
       background-color: #222;
       height: 200px;
       border-radius: 5px;
     }
-    
+
     .slideshow-container {
-      position: relative;
+      position: relatie;
       height: 40px;
       margin-bottom: 20px;
     }
-    
-    .slideshow-item {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
-    }
-    
-    .slideshow-item.active {
-      opacity: 1;
-    }
-    
-    .slideshow-item.blue {
-      background-color: #2196F3;
-    }
-    
-    .slideshow-item.green {
-      background-color: #4CAF50;
-    }
-    
-    .slideshow-item.red {
-      background-color: #F44336;
-    }
-    
-    .slideshow-item.yellow {
-      background-color: #FFEB3B;
-    }
-    
-    .slideshow-item.purple {
-      background-color: #9C27B0;
-    }
-    
-    .slideshow-item.orange {
-      background-color: #FF9800;
-    }
-    
-    .slideshow-item.cyan {
-      background-color: #00BCD4;
-    }
+   
+   
   </style>
-  <script>
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark-mode');
-    }
-    
-    var slideIndex = 0;
-    showSlides();
-    
-    function showSlides() {
-      var slides = document.getElementsByClassName("slideshow-item");
-      for (var i = 0; i < slides.length; i++) {
-        slides[i].style.opacity = "0";
-      }
-      slideIndex++;
-      if (slideIndex > slides.length) {
-        slideIndex = 1;
-      }
-      slides[slideIndex - 1].style.opacity = "1";
-      setTimeout(showSlides, 2000);
-    }
-  </script>
 </head>
 <body>
   <header class="header">
-    <a href="#" class="logo">Developer</a>
+    <a href="#" class="logo">Ai Project</a>
     <nav class="nav-items">
-      <div class="slideshow-container">
-        <div class="slideshow-item blue active"></div>
-        <div class="slideshow-item green"></div>
-        <div class="slideshow-item red"></div>
-        <div class="slideshow-item yellow"></div>
-        <div class="slideshow-item purple"></div>
-        <div class="slideshow-item orange"></div>
-        <div class="slideshow-item cyan"></div>
-      </div>
       <a href="#">Home</a>
       <a href="#">About</a>
       <a href="#">Contact</a>
     </nav>
-    <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+   
   </header>
 
-  <main role="main" class="container">
+  <main role="main" class="containr">
     <div class="row">
-      <div class="sidebar">
-        <div class="movie-display"></div>
-        <div class="movie-display"></div>
-        <div class="movie-display"></div>
-      </div>
+      
       <div class="col-md-g">
         {% block content %}
-        
-        
+
         {% endblock %}
       </div>
+    
+    
     </div>
+ 
   </main>
 
   <footer class="footer">
